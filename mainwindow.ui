@@ -1,0 +1,3498 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>871</width>
+    <height>607</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget
+{
+	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(102, 115, 140, 255),stop:1 rgba(56, 63, 77, 255));
+	color: #ffffff;
+	border-color: #051a39;
+
+}
+
+
+/*-----QLabel-----*/
+QLabel
+{
+	background-color: transparent;
+	color: #ffffff;
+	font-weight: bold;
+
+}
+
+
+QLabel::disabled
+{
+	background-color: transparent;
+	color: #898988;
+
+}
+
+
+/*-----QMenuBar-----*/
+QMenuBar
+{
+	background-color: #484c58;
+	color: #ffffff;
+	border-color: #051a39;
+	font-weight: bold;
+
+}
+
+
+QMenuBar::disabled
+{
+	background-color: #404040;
+	color: #898988;
+	border-color: #051a39;
+
+}
+
+
+QMenuBar::item
+{
+    background-color: transparent;
+
+}
+
+
+QMenuBar::item:selected
+{
+    background-color: #c4c5c3;
+	color: #000000;
+    border: 1px solid #000000;
+
+}
+
+
+QMenuBar::item:pressed
+{
+    background-color: #979796;
+    border: 1px solid #000;
+    margin-bottom: -1px;
+    padding-bottom: 1px;
+
+}
+
+
+/*-----QMenu-----*/
+QMenu
+{
+    background-color: #c4c5c3;
+    border: 1px solid;
+    color: #000000;
+	font-weight: bold;
+
+}
+
+
+QMenu::separator
+{
+    height: 1px;
+    background-color: #363942;
+    color: #ffffff;
+    padding-left: 4px;
+    margin-left: 10px;
+    margin-right: 5px;
+
+}
+
+
+QMenu::item
+{
+    min-width : 150px;
+    padding: 3px 20px 3px 20px;
+
+}
+
+
+QMenu::item:selected
+{
+    background-color: #363942;
+    color: #ffffff;
+
+}
+
+
+QMenu::item:disabled
+{
+    color: #898988;
+}
+
+
+/*-----QToolTip-----*/
+QToolTip
+{
+	background-color: #bbbcba;
+	color: #000000;
+	border-color: #051a39;
+	border : 1px solid #000000;
+	border-radius: 2px;
+
+}
+
+
+/*-----QPushButton-----*/
+QPushButton
+{
+	background-color: qlineargradient(spread:repeat, x1:0.486, y1:0, x2:0.505, y2:1, stop:0.00480769 rgba(170, 0, 0, 255),stop:1 rgba(122, 0, 0, 255));
+	color: #ffffff;
+	font-weight: bold;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 3px;
+	border-color: #051a39;
+	padding: 5px;
+
+}
+
+
+QPushButton::disabled
+{
+	background-color: #404040;
+	color: #656565;
+	border-color: #051a39;
+
+}
+
+
+QPushButton::hover
+{
+	background-color: #9c0000;
+	color: #ffffff;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 3px;
+	border-color: #051a39;
+	padding: 5px;
+
+}
+
+
+QPushButton::pressed
+{
+	background-color: #880000;
+	color: #ffffff;
+	border-style: solid;
+	border-width: 2px;
+	border-radius: 3px;
+	border-color: #000000;
+	padding: 5px;
+
+}
+
+
+/*-----QToolButton-----*/
+QToolButton 
+{
+	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(177, 181, 193, 255),stop:1 rgba(159, 163, 174, 255));
+	color: #ffffff;
+	font-weight: bold;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 3px;
+	border-color: #051a39;
+	padding: 5px;
+
+}
+
+
+QToolButton::disabled
+{
+	background-color: #404040;
+	color: #656565;
+	border-color: #051a39;
+
+}
+
+
+QToolButton::hover
+{
+	background-color: #9fa3ae;
+	color: #ffffff;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 3px;
+	border-color: #051a39;
+	padding: 5px;
+
+}
+
+
+QToolButton::pressed
+{
+	background-color: #7b7e86;
+	color: #ffffff;
+	border-style: solid;
+	border-width: 2px;
+	border-radius: 3px;
+	border-color: #000000;
+	padding: 5px;
+
+}
+
+
+/*-----QComboBox-----*/
+QComboBox
+{
+    background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(118, 118, 118, 255),stop:1 rgba(70, 70, 70, 255));
+    border: 1px solid #333333;
+    border-radius: 3px;
+    padding-left: 6px;
+    color: lightgray;
+	font-weight: bold;
+    height: 20px;
+
+}
+
+
+QComboBox::disabled
+{
+	background-color: #404040;
+	color: #656565;
+	border-color: #051a39;
+
+}
+
+
+QComboBox:hover
+{
+    background-color: #646464;
+
+}
+
+
+QComboBox:on
+{
+    background-color: #979796;
+	color: #000000;
+
+}
+
+
+QComboBox QAbstractItemView
+{
+    background-color: #c4c5c3;
+    color: #000000;
+    border: 1px solid black;
+    selection-background-color: #363942;
+    selection-color: #ffffff;
+    outline: 0;
+
+}
+
+
+QComboBox::drop-down
+{
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 15px;
+    border-left-width: 1px;
+    border-left-color: darkgray;
+    border-left-style: solid; 
+    border-top-right-radius: 3px; 
+    border-bottom-right-radius: 3px;
+
+}
+
+
+QComboBox::down-arrow
+{
+    image: url(://arrow-down.png);
+    width: 8px;
+    height: 8px;
+}
+
+
+/*-----QSpinBox &amp; QDoubleSpinBox &amp; QDateTimeEdit-----*/
+QSpinBox, 
+QDoubleSpinBox,
+QDateTimeEdit
+{
+	background-color: #000000;
+	color: #00ff00;
+	font-weight: bold;
+	border: 1px solid #333333;
+	padding : 4px;
+
+}
+
+
+QSpinBox::disabled, 
+QDoubleSpinBox::disabled,
+QDateTimeEdit::disabled
+{
+	background-color: #404040;
+	color: #656565;
+	border-color: #051a39;
+
+}
+
+
+QSpinBox:hover, 
+QDoubleSpinBox::hover,
+QDateTimeEdit::hover
+{
+    border: 1px solid #00ff00;
+
+}
+
+
+QSpinBox::up-button, QSpinBox::down-button,
+QDoubleSpinBox::up-button, QDoubleSpinBox::down-button,
+QDateTimeEdit::up-button, QDateTimeEdit::down-button
+{
+	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(118, 118, 118, 255),stop:1 rgba(70, 70, 70, 255));
+    border: 0px solid #333333;
+
+}
+
+
+QSpinBox::disabled, 
+QDoubleSpinBox::disabled,
+QDateTimeEdit::disabled
+{
+	background-color: #404040;
+	color: #656565;
+	border-color: #051a39;
+
+}
+
+
+QSpinBox::up-button:hover, QSpinBox::down-button:hover,
+QDoubleSpinBox::up-button:hover, QDoubleSpinBox::down-button:hover,
+QDateTimeEdit::up-button:hover, QDateTimeEdit::down-button:hover
+{
+	background-color: #646464;
+    border: 1px solid #333333;
+
+
+}
+
+
+QSpinBox::up-button:disabled, QSpinBox::down-button:disabled,
+QDoubleSpinBox::up-button:disabled, QDoubleSpinBox::down-button:disabled,
+QDateTimeEdit::up-button:disabled, QDateTimeEdit::down-button:disabled
+{
+	background-color: #404040;
+	color: #656565;
+	border-color: #051a39;
+
+}
+
+
+QSpinBox::up-button:pressed, QSpinBox::down-button:pressed,
+QDoubleSpinBox::up-button:pressed, QDoubleSpinBox::down-button::pressed,
+QDateTimeEdit::up-button:pressed, QDateTimeEdit::down-button::pressed
+{
+    background-color: #979796;
+    border: 1px solid #444444;
+
+}
+
+
+QSpinBox::down-arrow,
+QDoubleSpinBox::down-arrow,
+QDateTimeEdit::down-arrow
+{
+    image: url(://arrow-down.png);
+    width: 7px;
+
+}
+
+
+QSpinBox::up-arrow,
+QDoubleSpinBox::up-arrow,
+QDateTimeEdit::up-arrow
+{
+    image: url(://arrow-up.png);
+    width: 7px;
+
+}
+
+
+/*-----QLineEdit-----*/
+QLineEdit
+{
+	background-color: #000000;
+	color: #00ff00;
+	font-weight: bold;
+    border: 1px solid #333333;
+	padding: 4px;
+
+}
+
+
+QLineEdit:hover
+{
+    border: 1px solid #00ff00;
+
+}
+
+
+QLineEdit::disabled
+{
+	background-color: #404040;
+	color: #656565;
+	border-width: 1px;
+	border-color: #051a39;
+	padding: 2px;
+
+}
+
+
+/*-----QTextEdit-----*/
+QTextEdit
+{
+	background-color: #808080;
+	color: #fff;
+	border: 1px groove #333333;
+
+}
+
+
+QTextEdit::disabled
+{
+	background-color: #404040;
+	color: #656565;
+	border-color: #051a39;
+
+}
+
+
+/*-----QGroupBox-----*/
+QGroupBox 
+{
+    border: 1px groove #333333;
+	border-radius: 2px;
+    margin-top: 20px;
+
+}
+
+
+QGroupBox 
+{
+	background-color: qlineargradient(spread:repeat, x1:0.486, y1:0, x2:0.505, y2:1, stop:0.00480769 rgba(170, 169, 169, 255),stop:1 rgba(122, 122, 122, 255));
+	font-weight: bold;
+
+}
+
+
+QGroupBox::title  
+{
+    background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(71, 75, 87, 255),stop:1 rgba(35, 37, 43, 255));
+    color: #ffffff;
+    border: 2px groove #333333;
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    padding: 2px;
+
+}
+
+
+QGroupBox::title::disabled
+{
+	background-color: #404040;
+	color: #656565;
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    padding: 5px;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+
+}
+
+
+/*-----QCheckBox-----*/
+QCheckBox{
+	background-color: transparent;
+	font-weight: bold;
+	color: #fff;
+
+}
+
+
+QCheckBox::indicator
+{
+    color: #b1b1b1;
+    background-color: #323232;
+    border: 2px solid #222222;
+    width: 12px;
+    height: 12px;
+
+}
+
+
+QCheckBox::indicator:checked
+{
+    image:url(://checkbox.png);
+    border: 2px solid #00ff00;
+
+}
+
+
+QCheckBox::indicator:unchecked:hover
+{
+    border: 2px solid #00ff00;
+
+}
+
+
+QCheckBox::disabled
+{
+	color: #656565;
+
+}
+
+
+QCheckBox::indicator:disabled
+{
+	background-color: #656565;
+	color: #656565;
+    border: 1px solid #656565;
+
+}
+
+
+/*-----QRadioButton-----*/
+QRadioButton{
+	background-color: transparent;
+	font-weight: bold;
+	color: #fff;
+
+}
+
+
+QRadioButton::indicator::unchecked
+{ 
+	border: 2px inset #222222; 
+	border-radius: 6px; 
+	background-color:  #323232;
+	width: 9px; 
+	height: 9px; 
+
+}
+
+
+QRadioButton::indicator::unchecked:hover
+{ 
+	border: 2px solid #00ff00; 
+	border-radius: 5px; 
+	background-color:  #323232;
+	width: 9px; 
+	height: 9px; 
+
+}
+
+
+QRadioButton::indicator::checked
+{ 
+	border: 2px inset #222222; 
+	border-radius: 5px; 
+	background-color: #00ff00; 
+	width: 9px; 
+	height: 9px; 
+
+}
+
+
+QRadioButton::disabled
+{
+	color: #656565;
+
+}
+
+
+QRadioButton::indicator:disabled
+{
+	background-color: #656565;
+	color: #656565;
+    border: 2px solid #656565;
+
+}
+
+
+/*-----QTableView &amp; QTableWidget-----*/
+QTableView
+{
+    background-color: #808080;
+    border: 1px groove #333333;
+    color: #f0f0f0;
+	font-weight: bold;
+    gridline-color: #333333;
+    outline : 0;
+
+}
+
+
+QTableView::disabled
+{
+    background-color: #242526;
+    border: 1px solid #32414B;
+    color: #656565;
+    gridline-color: #656565;
+    outline : 0;
+
+}
+
+
+QTableView::item:hover 
+{
+    background-color: #484c58;
+    color: #f0f0f0;
+
+}
+
+
+QTableView::item:selected 
+{
+    background-color: #484c58;
+    border: 2px groove #00ff00;
+    color: #F0F0F0;
+
+}
+
+
+QTableView::item:selected:disabled
+{
+    background-color: #1a1b1c;
+    border: 2px solid #525251;
+    color: #656565;
+
+}
+
+
+QTableCornerButton::section
+{
+    background-color: #282830;
+
+}
+
+
+QHeaderView::section
+{
+    background-color: #282830;
+    color: #fff;
+	font-weight: bold;
+    text-align: left;
+	padding: 4px;
+	
+}
+
+
+QHeaderView::section:disabled
+{
+    background-color: #525251;
+    color: #656565;
+
+}
+
+
+QHeaderView::section:checked
+{
+    background-color: #00ff00;
+
+}
+
+
+QHeaderView::section:checked:disabled
+{
+    color: #656565;
+    background-color: #525251;
+
+}
+
+
+QHeaderView::section::vertical::first,
+QHeaderView::section::vertical::only-one
+{
+    border-top: 0px;
+
+}
+
+
+QHeaderView::section::vertical
+{
+    border-top: 0px;
+
+}
+
+
+QHeaderView::section::horizontal::first,
+QHeaderView::section::horizontal::only-one
+{
+    border-left: 0px;
+
+}
+
+
+QHeaderView::section::horizontal
+{
+    border-left: 0px;
+
+}
+
+
+/*-----QTabWidget-----*/
+QTabBar::tab
+{
+	background-color: transparent;
+	color: #ffffff;
+	font-weight: bold;
+	width: 80px;
+	height: 9px;
+	
+}
+
+
+QTabBar::tab:disabled
+{
+	background-color: #656565;
+	color: #656565;
+
+}
+
+
+QTabWidget::pane 
+{
+	background-color: transparent;
+	color: #ffffff;
+	border: 1px groove #333333;
+
+}
+
+
+QTabBar::tab:selected
+{
+    background-color: #484c58;
+	color: #ffffff;
+	border: 1px groove #333333;
+	border-bottom: 0px;
+
+}
+
+
+QTabBar::tab:selected:disabled
+{
+	background-color: #404040;
+	color: #656565;
+
+}
+
+
+QTabBar::tab:!selected 
+{
+    background-color: #a3a7b2;
+
+}
+
+
+QTabBar::tab:!selected:hover 
+{
+    background-color: #484c58;
+
+}
+
+
+QTabBar::tab:top:!selected 
+{
+    margin-top: 1px;
+
+}
+
+
+QTabBar::tab:bottom:!selected 
+{
+    margin-bottom: 3px;
+
+}
+
+
+QTabBar::tab:top, QTabBar::tab:bottom 
+{
+    min-width: 8ex;
+    margin-right: -1px;
+    padding: 5px 10px 5px 10px;
+
+}
+
+
+QTabBar::tab:top:selected 
+{
+    border-bottom-color: none;
+
+}
+
+
+QTabBar::tab:bottom:selected 
+{
+    border-top-color: none;
+
+}
+
+
+QTabBar::tab:top:last, QTabBar::tab:bottom:last,
+QTabBar::tab:top:only-one, QTabBar::tab:bottom:only-one 
+{
+    margin-right: 0;
+
+}
+
+
+QTabBar::tab:left:!selected 
+{
+    margin-right: 2px;
+
+}
+
+
+QTabBar::tab:right:!selected
+{
+    margin-left: 2px;
+
+}
+
+
+QTabBar::tab:left, QTabBar::tab:right 
+{
+    min-height: 15ex;
+    margin-bottom: -1px;
+    padding: 10px 5px 10px 5px;
+
+}
+
+
+QTabBar::tab:left:selected 
+{
+    border-left-color: none;
+
+}
+
+
+QTabBar::tab:right:selected 
+{
+    border-right-color: none;
+
+}
+
+
+QTabBar::tab:left:last, QTabBar::tab:right:last,
+QTabBar::tab:left:only-one, QTabBar::tab:right:only-one 
+{
+    margin-bottom: 0;
+
+}
+
+
+/*-----QSlider-----*/
+QSlider{
+	background-color: transparent;
+
+}
+
+
+QSlider::groove:horizontal 
+{
+	background-color: transparent;
+	height: 6px;
+
+}
+
+
+QSlider::sub-page:horizontal 
+{
+	background-color: qlineargradient(spread:reflect, x1:1, y1:0, x2:1, y2:1, stop:0.00480769 rgba(201, 201, 201, 255),stop:1 rgba(72, 72, 72, 255));
+	border: 1px solid #000;
+
+}
+
+
+QSlider::add-page:horizontal 
+{
+	background-color: #404040;
+	border: 1px solid #000; 
+
+}
+
+
+QSlider::handle:horizontal 
+{
+	background-color: qlineargradient(spread:reflect, x1:1, y1:0, x2:1, y2:1, stop:0.00480769 rgba(201, 201, 201, 255),stop:1 rgba(72, 72, 72, 255));
+	border: 1px solid #000; 
+	width: 12px;
+	margin-top: -6px;
+	margin-bottom: -6px;
+
+}
+
+
+QSlider::handle:horizontal:hover 
+{
+	background-color: #808080;
+
+}
+
+
+QSlider::sub-page:horizontal:disabled 
+{
+	background-color: #bbb;
+	border-color: #999;
+
+}
+
+
+QSlider::add-page:horizontal:disabled 
+{
+	background-color: #eee;
+	border-color: #999;
+
+}
+
+
+QSlider::handle:horizontal:disabled 
+{
+	background-color: #eee;
+	border: 1px solid #aaa;
+
+}
+
+
+QSlider::groove:vertical 
+{
+	background-color: transparent;
+	width: 6px;
+
+}
+
+
+QSlider::sub-page:vertical 
+{
+	background-color: qlineargradient(spread:reflect, x1:0, y1:0.483, x2:1, y2:0.517, stop:0.00480769 rgba(201, 201, 201, 255),stop:1 rgba(72, 72, 72, 255));
+	border: 1px solid #000;
+
+}
+
+
+QSlider::add-page:vertical 
+{
+	background-color: #404040;
+	border: 1px solid #000;
+
+}
+
+
+QSlider::handle:vertical 
+{
+	background-color: qlineargradient(spread:reflect, x1:0, y1:0.483, x2:1, y2:0.517, stop:0.00480769 rgba(201, 201, 201, 255),stop:1 rgba(72, 72, 72, 255));
+	border: 1px solid #000;
+	height: 12px;
+	margin-left: -6px;
+	margin-right: -6px;
+
+}
+
+
+QSlider::handle:vertical:hover 
+{
+	background-color: #808080;
+
+}
+
+
+QSlider::sub-page:vertical:disabled 
+{
+	background-color: #bbb;
+	border-color: #999;
+
+}
+
+
+QSlider::add-page:vertical:disabled 
+{
+	background-color: #eee;
+	border-color: #999;
+
+}
+
+
+QSlider::handle:vertical:disabled 
+{
+	background-color: #eee;
+	border: 1px solid #aaa;
+	border-radius: 3px;
+
+}
+
+
+/*-----QDial-----*/
+QDial
+{
+	background-color: #600000;
+
+}
+
+
+QDial::disabled
+{
+	background-color: #404040;
+
+}
+
+
+/*-----QScrollBar-----*/
+QScrollBar:horizontal
+{
+    border: 1px solid #222222;
+    background-color: #63676d;
+    height: 18px;
+    margin: 0px 18px 0 18px;
+
+}
+
+
+QScrollBar::handle:horizontal
+{
+    background-color: #a6acb3;
+	border: 1px solid #656565;
+	border-radius: 2px;
+    min-height: 20px;
+
+}
+
+
+QScrollBar::add-line:horizontal
+{
+    border: 1px solid #1b1b19;
+    background-color: #a6acb3;
+    width: 18px;
+    subcontrol-position: right;
+    subcontrol-origin: margin;
+
+}
+
+
+QScrollBar::sub-line:horizontal
+{
+    border: 1px solid #1b1b19;
+    background-color: #a6acb3;
+    width: 18px;
+    subcontrol-position: left;
+    subcontrol-origin: margin;
+
+}
+
+
+QScrollBar::right-arrow:horizontal
+{
+    image: url(://arrow-right.png);
+    width: 8px;
+    height: 8px;
+
+}
+
+
+QScrollBar::left-arrow:horizontal
+{
+    image: url(://arrow-left.png);
+    width: 8px;
+    height: 8px;
+
+}
+
+
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal
+{
+    background: none;
+
+}
+
+
+QScrollBar:vertical
+{
+    background-color: #63676d;
+    width: 18px;
+    margin: 18px 0 18px 0;
+    border: 1px solid #222222;
+
+}
+
+
+QScrollBar::handle:vertical
+{
+    background-color: #a6acb3;
+	border: 1px solid #656565;
+	border-radius: 2px;
+    min-height: 20px;
+
+}
+
+
+QScrollBar::add-line:vertical
+{
+    border: 1px solid #1b1b19;
+    background-color: #a6acb3;
+    height: 18px;
+    subcontrol-position: bottom;
+    subcontrol-origin: margin;
+
+}
+
+
+QScrollBar::sub-line:vertical
+{
+    border: 1px solid #1b1b19;
+    background-color: #a6acb3;
+    height: 18px;
+    subcontrol-position: top;
+    subcontrol-origin: margin;
+
+}
+
+
+QScrollBar::up-arrow:vertical
+{
+    image: url(://arrow-up.png);
+    width: 8px;
+    height: 8px;
+
+}
+
+
+QScrollBar::down-arrow:vertical
+{
+    image: url(://arrow-down.png);
+    width: 8px;
+    height: 8px;
+
+}
+
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
+{
+    background: none;
+
+}
+
+
+/*-----QProgressBar-----*/
+QProgressBar
+{
+	background-color: #000;
+	color: #00ff00;
+	font-weight: bold;
+	border: 0px groove #000;
+	border-radius: 10px;
+	text-align: center;
+
+}
+
+
+QProgressBar:disabled
+{
+	background-color: #404040;
+	color: #656565;
+	border-color: #051a39;
+	border: 1px solid #000;
+	border-radius: 10px;
+	text-align: center;
+
+}
+
+
+QProgressBar::chunk {
+	background-color: #ffaf02;
+	border: 0px;
+	border-radius: 10px;
+	color: #000;
+
+}
+
+
+QProgressBar::chunk:disabled {
+	background-color: #333;
+	border: 0px;
+	border-radius: 10px;
+	color: #656565;
+}
+
+
+/*-----QStatusBar-----*/
+QStatusBar
+{
+	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(102, 115, 140, 255),stop:1 rgba(56, 63, 77, 255));
+	color: #ffffff;
+	border-color: #051a39;
+	font-weight: bold;
+
+}
+
+</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <item>
+     <widget class="QStackedWidget" name="stackedWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="pageDashboard">
+       <widget class="QWidget" name="layoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>781</width>
+          <height>581</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout2" stretch="1,5,3,1">
+         <property name="spacing">
+          <number>5</number>
+         </property>
+         <item>
+          <widget class="QFrame" name="frame_2">
+           <property name="font">
+            <font>
+             <family>Ubuntu Sans</family>
+             <bold>true</bold>
+             <underline>false</underline>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QFrame, QLabel, QToolTip {
+	color: rgb(0, 0, 0);
+    border: 2px solid black;
+    border-radius: 4px;
+    padding: 2px;
+}</string>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::Panel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <widget class="QWidget" name="layoutWidget">
+            <property name="geometry">
+             <rect>
+              <x>20</x>
+              <y>10</y>
+              <width>731</width>
+              <height>41</height>
+             </rect>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0,0,0,0">
+             <item>
+              <widget class="QLabel" name="lblRmode">
+               <property name="font">
+                <font>
+                 <family>Ubuntu Sans</family>
+                 <pointsize>13</pointsize>
+                 <bold>true</bold>
+                 <underline>false</underline>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">background-color: rgb(4, 20, 82);
+	color: rgb(255, 255, 255);
+    font-weight: bold;</string>
+               </property>
+               <property name="text">
+                <string>Mode : GUARD MODE</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="lblDate">
+               <property name="font">
+                <font>
+                 <family>Ubuntu Sans</family>
+                 <pointsize>13</pointsize>
+                 <bold>true</bold>
+                 <underline>false</underline>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">background-color: rgb(4, 20, 82);
+	color: rgb(255, 255, 255);
+    font-weight: bold;</string>
+               </property>
+               <property name="text">
+                <string>dd-MM-yyyy</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="lblTime">
+               <property name="font">
+                <font>
+                 <family>Ubuntu Sans</family>
+                 <pointsize>13</pointsize>
+                 <bold>true</bold>
+                 <underline>false</underline>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">background-color: rgb(4, 20, 82);
+	color: rgb(255, 255, 255);
+    font-weight: bold;</string>
+               </property>
+               <property name="text">
+                <string>hh:mm:ss</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label">
+               <property name="font">
+                <font>
+                 <family>Ubuntu Sans</family>
+                 <pointsize>13</pointsize>
+                 <bold>true</bold>
+                 <underline>false</underline>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">background-color: rgb(4, 20, 82);
+	color: rgb(255, 255, 255);
+    font-weight: bold;</string>
+               </property>
+               <property name="text">
+                <string>Train:12345 </string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btnSlaveUnit">
+               <property name="styleSheet">
+                <string notr="true">QPushButton {
+    background-color: rgb(4, 20, 82);
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    border-radius: 4px;
+}</string>
+               </property>
+               <property name="text">
+                <string>Slave Unit</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFrame" name="frame">
+           <property name="styleSheet">
+            <string notr="true">QFrame, QLabel, QToolTip {
+	color: rgb(0, 0, 0);
+    border: 2px solid black;
+    border-radius: 4px;
+    padding: 2px;
+}</string>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <widget class="QWidget" name="layoutWidget">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>0</y>
+              <width>761</width>
+              <height>281</height>
+             </rect>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="0,0">
+             <item>
+              <widget class="QFrame" name="frame_5">
+               <property name="styleSheet">
+                <string notr="true">QFrame, QLabel, QToolTip {
+	color: rgb(0, 0, 0);
+    border: 2px solid black;
+    border-radius: 4px;
+    padding: 2px;
+}</string>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <widget class="QWidget" name="layoutWidget">
+                <property name="geometry">
+                 <rect>
+                  <x>10</x>
+                  <y>40</y>
+                  <width>341</width>
+                  <height>181</height>
+                 </rect>
+                </property>
+                <layout class="QVBoxLayout" name="verticalLayout_3">
+                 <item>
+                  <widget class="QLabel" name="lblCallStatus">
+                   <property name="font">
+                    <font>
+                     <pointsize>13</pointsize>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">QFrame, QLabel, QToolTip {
+	color: rgb(255, 0, 0);
+    border: 2px solid black;
+    border-radius: 4px;
+    padding: 2px;
+}</string>
+                   </property>
+                   <property name="text">
+                    <string>No Active Call</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="lblCoach">
+                   <property name="font">
+                    <font>
+                     <pointsize>14</pointsize>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Coach : ---</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="lblActiveETBU">
+                   <property name="font">
+                    <font>
+                     <pointsize>14</pointsize>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>ETBU: ---</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="lblTimer">
+                   <property name="font">
+                    <font>
+                     <pointsize>14</pointsize>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>00:00:00</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+               <widget class="QWidget" name="layoutWidget">
+                <property name="geometry">
+                 <rect>
+                  <x>10</x>
+                  <y>230</y>
+                  <width>351</width>
+                  <height>41</height>
+                 </rect>
+                </property>
+                <layout class="QHBoxLayout" name="horizontalLayout_4">
+                 <item>
+                  <widget class="QPushButton" name="btnHold">
+                   <property name="font">
+                    <font>
+                     <pointsize>12</pointsize>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">QPushButton
+{
+	background-color: rgb(229, 165, 10);
+    color: white;
+    font-weight: bold;
+}
+
+QPushButton:hover
+{
+	
+	background-color: rgb(249, 240, 107);
+	color: rgb(0, 0, 0);
+}
+
+QPushButton:pressed
+{
+	background-color: rgb(229, 165, 10);
+}</string>
+                   </property>
+                   <property name="text">
+                    <string>  HOLD</string>
+                   </property>
+                   <property name="icon">
+                    <iconset theme="media-playback-pause">
+                     <normaloff>.</normaloff>.</iconset>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btnEnd">
+                   <property name="font">
+                    <font>
+                     <pointsize>12</pointsize>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">QPushButton
+{
+	background-color: rgb(185, 8, 8);
+    color: White;
+    font-weight: bold;
+}
+
+QPushButton:hover
+{
+	background-color: rgb(224, 27, 36);
+	color: rgb(255, 255, 255);
+}
+
+QPushButton:pressed
+{
+	background-color: rgb(131, 19, 19);
+}</string>
+                   </property>
+                   <property name="text">
+                    <string>END</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+               <widget class="QLabel" name="label_4">
+                <property name="geometry">
+                 <rect>
+                  <x>60</x>
+                  <y>0</y>
+                  <width>251</width>
+                  <height>31</height>
+                 </rect>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Ubuntu Sans</family>
+                  <pointsize>11</pointsize>
+                  <italic>false</italic>
+                  <bold>true</bold>
+                  <underline>false</underline>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">font: 700 11pt &quot;Ubuntu Sans&quot;;
+color: rgb(255, 255, 255);
+background-color: rgb(5, 15, 85);
+</string>
+                </property>
+                <property name="text">
+                 <string>ACTIVE CALL WINDOW</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </widget>
+             </item>
+             <item>
+              <widget class="QFrame" name="frame_6">
+               <property name="styleSheet">
+                <string notr="true">QFrame, QLabel, QToolTip {
+	color: rgb(0, 0, 0);
+    border: 2px solid black;
+    border-radius: 4px;
+    padding: 2px;
+}</string>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <widget class="QLabel" name="label_5">
+                <property name="geometry">
+                 <rect>
+                  <x>70</x>
+                  <y>0</y>
+                  <width>241</width>
+                  <height>31</height>
+                 </rect>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Ubuntu Sans</family>
+                  <pointsize>11</pointsize>
+                  <italic>false</italic>
+                  <bold>true</bold>
+                  <underline>false</underline>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">font: 700 11pt &quot;Ubuntu Sans&quot;;
+color: rgb(255, 255, 255);
+background-color: rgb(5, 15, 85);</string>
+                </property>
+                <property name="text">
+                 <string>ETBU STATUS WINDOW</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+               <widget class="QTableWidget" name="tableEtbuStatus">
+                <property name="geometry">
+                 <rect>
+                  <x>40</x>
+                  <y>40</y>
+                  <width>321</width>
+                  <height>171</height>
+                 </rect>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>14</pointsize>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="gridStyle">
+                 <enum>Qt::SolidLine</enum>
+                </property>
+                <attribute name="horizontalHeaderMinimumSectionSize">
+                 <number>34</number>
+                </attribute>
+                <attribute name="verticalHeaderVisible">
+                 <bool>false</bool>
+                </attribute>
+                <attribute name="verticalHeaderMinimumSectionSize">
+                 <number>22</number>
+                </attribute>
+                <attribute name="verticalHeaderHighlightSections">
+                 <bool>false</bool>
+                </attribute>
+                <row>
+                 <property name="text">
+                  <string>1</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>2</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>3</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>4</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>5</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>6</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>7</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>8</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>9</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>10</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>11</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>12</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>13</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>14</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>15</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>16</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>17</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>18</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>19</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>20</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>21</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>22</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>23</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>24</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>25</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>26</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>27</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>28</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>29</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>30</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>31</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>32</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>33</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>34</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>35</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>36</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>37</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>38</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>39</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>40</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>41</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>42</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>43</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>44</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>45</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>46</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>47</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>48</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>49</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>50</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>51</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>New Row</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>53</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>54</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>55</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>56</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>57</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>58</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>59</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>New Row</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>60</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>61</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>62</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>64</string>
+                 </property>
+                </row>
+                <column>
+                 <property name="text">
+                  <string>ETBU ID</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>STATUS</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>STATE</string>
+                 </property>
+                </column>
+               </widget>
+               <widget class="QWidget" name="layoutWidget_2">
+                <property name="geometry">
+                 <rect>
+                  <x>10</x>
+                  <y>220</y>
+                  <width>351</width>
+                  <height>41</height>
+                 </rect>
+                </property>
+                <layout class="QHBoxLayout" name="horizontalLayout_5">
+                 <item>
+                  <widget class="QLabel" name="lblOnlineCount">
+                   <property name="font">
+                    <font>
+                     <pointsize>13</pointsize>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true"> background-color: green;
+ color: white;
+ font-weight: bold;</string>
+                   </property>
+                   <property name="text">
+                    <string>   Online : 0 </string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="lblOfflineCount">
+                   <property name="font">
+                    <font>
+                     <pointsize>13</pointsize>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">background-color: rgb(185, 8, 8);
+ color: White;
+ font-weight: bold;</string>
+                   </property>
+                   <property name="text">
+                    <string>   Offline : 64</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFrame" name="frame_3">
+           <property name="minimumSize">
+            <size>
+             <width>579</width>
+             <height>122</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QFrame, QLabel, QToolTip {
+	color: rgb(0, 0, 0);
+    border: 2px solid black;
+    border-radius: 4px;
+    padding: 2px;
+}</string>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <widget class="QTableWidget" name="tableWidget">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>40</y>
+              <width>541</width>
+              <height>121</height>
+             </rect>
+            </property>
+            <property name="font">
+             <font>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="mouseTracking">
+             <bool>true</bool>
+            </property>
+            <property name="selectionMode">
+             <enum>QAbstractItemView::SingleSelection</enum>
+            </property>
+            <property name="selectionBehavior">
+             <enum>QAbstractItemView::SelectRows</enum>
+            </property>
+            <property name="gridStyle">
+             <enum>Qt::DotLine</enum>
+            </property>
+            <column>
+             <property name="text">
+              <string>ID</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Coach</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>ETBU ID</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>STATUS</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>WAIT TIME</string>
+             </property>
+            </column>
+           </widget>
+           <widget class="QLabel" name="label_6">
+            <property name="geometry">
+             <rect>
+              <x>200</x>
+              <y>0</y>
+              <width>191</width>
+              <height>31</height>
+             </rect>
+            </property>
+            <property name="font">
+             <font>
+              <family>Ubuntu Sans</family>
+              <pointsize>11</pointsize>
+              <italic>false</italic>
+              <bold>true</bold>
+              <underline>false</underline>
+              <kerning>false</kerning>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font: 700 11pt &quot;Ubuntu Sans&quot;;
+color: rgb(255, 255, 255);
+background-color: rgb(5, 15, 85);</string>
+            </property>
+            <property name="text">
+             <string>CALL QUEUE</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="btnanswer">
+            <property name="geometry">
+             <rect>
+              <x>610</x>
+              <y>90</y>
+              <width>121</width>
+              <height>41</height>
+             </rect>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true"> QPushButton
+{
+    background-color: green;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+QPushButton:hover
+{
+	background-color: rgb(46, 194, 126);
+	color: rgb(255, 255, 255);
+}
+
+QPushButton:pressed
+{
+    
+	background-color: rgb(87, 227, 137);
+}</string>
+            </property>
+            <property name="text">
+             <string>ANSWER</string>
+            </property>
+           </widget>
+           <widget class="QLabel" name="lblselAnsetbu">
+            <property name="geometry">
+             <rect>
+              <x>560</x>
+              <y>30</y>
+              <width>201</width>
+              <height>51</height>
+             </rect>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(165, 29, 45);
+background-color: rgb(192, 191, 188);</string>
+            </property>
+            <property name="text">
+             <string>SLECTED ETBU : None</string>
+            </property>
+           </widget>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFrame" name="frame_4">
+           <property name="styleSheet">
+            <string notr="true">QFrame, QLabel, QToolTip {
+	color: rgb(0, 0, 0);
+    border: 2px solid black;
+    border-radius: 4px;
+    padding: 2px;
+}</string>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <widget class="QWidget" name="layoutWidget">
+            <property name="geometry">
+             <rect>
+              <x>20</x>
+              <y>0</y>
+              <width>731</width>
+              <height>46</height>
+             </rect>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_6">
+             <property name="spacing">
+              <number>14</number>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>9</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QPushButton" name="btnlog">
+               <property name="sizeIncrement">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>13</pointsize>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton
+{
+	background-color: rgb(4, 20, 82);
+	color: rgb(255, 255, 255);
+    font-weight: bold;
+}
+
+QPushButton:hover
+{
+	background-color: rgb(26, 132, 225);
+	color: rgb(255, 255, 255);
+}
+
+QPushButton:pressed
+{
+    
+	background-color: rgb(87, 227, 137);
+}</string>
+               </property>
+               <property name="text">
+                <string> VIEW_LOG</string>
+               </property>
+               <property name="icon">
+                <iconset theme="task-due">
+                 <normaloff>.</normaloff>.</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btnSettings">
+               <property name="sizeIncrement">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>13</pointsize>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton
+{
+	background-color: rgb(4, 20, 82);
+	color: rgb(255, 255, 255);
+    font-weight: bold;
+}
+
+QPushButton:hover
+{
+	background-color: rgb(26, 132, 225);
+	color: rgb(255, 255, 255);
+}
+
+QPushButton:pressed
+{
+    
+	background-color: rgb(87, 227, 137);
+}</string>
+               </property>
+               <property name="text">
+                <string>  SETTINGS</string>
+               </property>
+               <property name="icon">
+                <iconset theme="document-properties">
+                 <normaloff>.</normaloff>.</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btnHealth">
+               <property name="sizeIncrement">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>13</pointsize>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton
+{
+	background-color: rgb(4, 20, 82);
+	color: rgb(255, 255, 255);
+    font-weight: bold;
+}
+
+QPushButton:hover
+{
+	background-color: rgb(26, 132, 225);
+	color: rgb(255, 255, 255);
+}
+
+QPushButton:pressed
+{
+    
+	background-color: rgb(87, 227, 137);
+}</string>
+               </property>
+               <property name="text">
+                <string>HEALTH</string>
+               </property>
+               <property name="icon">
+                <iconset theme="emblem-favorite">
+                 <normaloff>.</normaloff>.</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btnComm">
+               <property name="sizeIncrement">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Ubuntu Sans</family>
+                 <pointsize>13</pointsize>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton
+{
+	background-color: rgb(4, 20, 82);
+	color: rgb(255, 255, 255);
+    font-weight: bold;
+}
+
+QPushButton:hover
+{
+	background-color: rgb(26, 132, 225);
+	color: rgb(255, 255, 255);
+}
+
+QPushButton:pressed
+{
+    
+	background-color: rgb(87, 227, 137);
+}</string>
+               </property>
+               <property name="text">
+                <string>START COMM</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QLabel" name="lblRuRole">
+        <property name="geometry">
+         <rect>
+          <x>620</x>
+          <y>50</y>
+          <width>120</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>MASTER</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblAlarmBanner">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>6</y>
+          <width>400</width>
+          <height>34</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>13</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="visible">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(200,40,40); color: white; border-radius: 4px; padding: 4px;</string>
+        </property>
+        <property name="text">
+         <string>CALL FROM ETBU --</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="pageSettings">
+       <widget class="QLabel" name="lblSettingsTitle">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>8</y>
+          <width>400</width>
+          <height>28</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>SETTINGS</string>
+        </property>
+       </widget>
+       <widget class="QGroupBox" name="grpDeviceIdentity">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>44</y>
+          <width>360</width>
+          <height>110</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Device Identity</string>
+        </property>
+        <widget class="QLabel" name="lblUnitId">
+         <property name="geometry">
+          <rect>
+           <x>15</x>
+           <y>24</y>
+           <width>330</width>
+           <height>18</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Unit ID : --</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblSwVersion">
+         <property name="geometry">
+          <rect>
+           <x>15</x>
+           <y>48</y>
+           <width>330</width>
+           <height>18</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Software Version : --</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblHwVersion">
+         <property name="geometry">
+          <rect>
+           <x>15</x>
+           <y>72</y>
+           <width>330</width>
+           <height>18</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Hardware Version : --</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="grpCommSettings">
+        <property name="geometry">
+         <rect>
+          <x>400</x>
+          <y>44</y>
+          <width>360</width>
+          <height>110</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Communication (RS-485, ICF/ED/P/001)</string>
+        </property>
+        <widget class="QLabel" name="lblCommPortInfo">
+         <property name="geometry">
+          <rect>
+           <x>15</x>
+           <y>24</y>
+           <width>330</width>
+           <height>18</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Port : --</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblCommBaudInfo">
+         <property name="geometry">
+          <rect>
+           <x>15</x>
+           <y>48</y>
+           <width>330</width>
+           <height>18</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Baud Rate : 38400 (fixed by spec)</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblResponderAddrInfo">
+         <property name="geometry">
+          <rect>
+           <x>15</x>
+           <y>72</y>
+           <width>330</width>
+           <height>18</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Responder Address : --</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="grpGpsSettings">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>164</y>
+          <width>360</width>
+          <height>110</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>GPS</string>
+        </property>
+        <widget class="QLabel" name="lblGpsPortInfo">
+         <property name="geometry">
+          <rect>
+           <x>15</x>
+           <y>24</y>
+           <width>330</width>
+           <height>18</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Port : --</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblGpsFixInfo">
+         <property name="geometry">
+          <rect>
+           <x>15</x>
+           <y>48</y>
+           <width>330</width>
+           <height>18</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Fix Status : --</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblGpsCoordInfo">
+         <property name="geometry">
+          <rect>
+           <x>15</x>
+           <y>72</y>
+           <width>330</width>
+           <height>18</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Location : --</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="grpAudioSettings">
+        <property name="geometry">
+         <rect>
+          <x>400</x>
+          <y>164</y>
+          <width>360</width>
+          <height>110</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Audio Playback</string>
+        </property>
+        <widget class="QLabel" name="lblPlaybackDevice">
+         <property name="geometry">
+          <rect>
+           <x>15</x>
+           <y>26</y>
+           <width>120</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Playback Device</string>
+         </property>
+        </widget>
+        <widget class="QComboBox" name="cmbPlaybackDevice">
+         <property name="geometry">
+          <rect>
+           <x>150</x>
+           <y>24</y>
+           <width>190</width>
+           <height>26</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblVolume">
+         <property name="geometry">
+          <rect>
+           <x>15</x>
+           <y>66</y>
+           <width>120</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Volume</string>
+         </property>
+        </widget>
+        <widget class="QSlider" name="sliderVolume">
+         <property name="geometry">
+          <rect>
+           <x>150</x>
+           <y>68</y>
+           <width>190</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="minimum">
+          <number>0</number>
+         </property>
+         <property name="maximum">
+          <number>100</number>
+         </property>
+         <property name="value">
+          <number>80</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="grpRetention">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>284</y>
+          <width>360</width>
+          <height>66</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Log Retention (Clause 6.3)</string>
+        </property>
+        <widget class="QLabel" name="lblRetentionInfo">
+         <property name="geometry">
+          <rect>
+           <x>15</x>
+           <y>24</y>
+           <width>330</width>
+           <height>30</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Call logs and audio are automatically deleted after 30 days.</string>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="grpLanguage">
+        <property name="geometry">
+         <rect>
+          <x>400</x>
+          <y>284</y>
+          <width>360</width>
+          <height>66</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Display Language (Clause 6.18)</string>
+        </property>
+        <widget class="QComboBox" name="cmbLanguage">
+         <property name="geometry">
+          <rect>
+           <x>15</x>
+           <y>26</y>
+           <width>330</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <item>
+          <property name="text">
+           <string>English</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Hindi</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Regional</string>
+          </property>
+         </item>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="grpUserLogin">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>360</y>
+          <width>740</width>
+          <height>90</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>User Login (Clause 8.3 - authentication &amp; access rights)</string>
+        </property>
+        <widget class="QLabel" name="lblUsername">
+         <property name="geometry">
+          <rect>
+           <x>15</x>
+           <y>28</y>
+           <width>90</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Username</string>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="txtUsername">
+         <property name="geometry">
+          <rect>
+           <x>110</x>
+           <y>26</y>
+           <width>180</width>
+           <height>26</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblPassword">
+         <property name="geometry">
+          <rect>
+           <x>310</x>
+           <y>28</y>
+           <width>90</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Password</string>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="txtPassword">
+         <property name="geometry">
+          <rect>
+           <x>400</x>
+           <y>26</y>
+           <width>180</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <property name="echoMode">
+          <enum>QLineEdit::Password</enum>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="btnLogin">
+         <property name="geometry">
+          <rect>
+           <x>600</x>
+           <y>26</y>
+           <width>60</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Login</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="btnLogout">
+         <property name="geometry">
+          <rect>
+           <x>670</x>
+           <y>26</y>
+           <width>60</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Logout</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblCurrentUser">
+         <property name="geometry">
+          <rect>
+           <x>15</x>
+           <y>66</y>
+           <width>715</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Logged in as : none (operator access only)</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QLabel" name="lblAlarmTimeout">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>454</y>
+          <width>280</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Call alarm escalation timeout (Clause 5.2, programmable):</string>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="spinAlarmTimeout">
+        <property name="geometry">
+         <rect>
+          <x>300</x>
+          <y>452</y>
+          <width>80</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="suffix">
+         <string> s</string>
+        </property>
+        <property name="minimum">
+         <number>5</number>
+        </property>
+        <property name="maximum">
+         <number>300</number>
+        </property>
+        <property name="value">
+         <number>30</number>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="btnExportLogs">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>482</y>
+          <width>200</width>
+          <height>30</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Export Logs to Media</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="btndashboard">
+        <property name="geometry">
+         <rect>
+          <x>620</x>
+          <y>482</y>
+          <width>140</width>
+          <height>30</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Go Home</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="pagehealth">
+       <widget class="QLabel" name="lblHealthTitle">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>8</y>
+          <width>500</width>
+          <height>28</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>SYSTEM HEALTH &amp; DIAGNOSTICS</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblFaultBanner">
+        <property name="geometry">
+         <rect>
+          <x>400</x>
+          <y>8</y>
+          <width>360</width>
+          <height>28</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(40,160,60); border-radius: 4px; padding: 4px;</string>
+        </property>
+        <property name="text">
+         <string>ALL SYSTEMS NORMAL</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QGroupBox" name="grpSystemStatus">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>44</y>
+          <width>740</width>
+          <height>90</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>System Status (Clause 6.7 - self diagnostic)</string>
+        </property>
+        <widget class="QLabel" name="lblHealthComm">
+         <property name="geometry">
+          <rect>
+           <x>15</x>
+           <y>26</y>
+           <width>135</width>
+           <height>44</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(120,120,120); border-radius: 4px;</string>
+         </property>
+         <property name="text">
+          <string>RS-485 LINK
+--</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblHealthGps">
+         <property name="geometry">
+          <rect>
+           <x>165</x>
+           <y>26</y>
+           <width>135</width>
+           <height>44</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(120,120,120); border-radius: 4px;</string>
+         </property>
+         <property name="text">
+          <string>GPS
+--</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblHealthDb">
+         <property name="geometry">
+          <rect>
+           <x>315</x>
+           <y>26</y>
+           <width>135</width>
+           <height>44</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(120,120,120); border-radius: 4px;</string>
+         </property>
+         <property name="text">
+          <string>DATABASE
+--</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblHealthAudio">
+         <property name="geometry">
+          <rect>
+           <x>465</x>
+           <y>26</y>
+           <width>135</width>
+           <height>44</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(120,120,120); border-radius: 4px;</string>
+         </property>
+         <property name="text">
+          <string>RECORDER
+--</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblHealthStorage">
+         <property name="geometry">
+          <rect>
+           <x>615</x>
+           <y>26</y>
+           <width>115</width>
+           <height>44</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(120,120,120); border-radius: 4px;</string>
+         </property>
+         <property name="text">
+          <string>STORAGE
+--</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="grpEtbuHealth">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>144</y>
+          <width>740</width>
+          <height>190</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>ETBU Communication Health (per unit)</string>
+        </property>
+        <widget class="QTableWidget" name="tableEtbuHealth">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>22</y>
+           <width>720</width>
+           <height>158</height>
+          </rect>
+         </property>
+         <attribute name="verticalHeaderVisible">
+          <bool>false</bool>
+         </attribute>
+         <column>
+          <property name="text">
+           <string>ETBU</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Status</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>State</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>SW Ver</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Last Response</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Fault</string>
+          </property>
+         </column>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="grpLinkDiagnostics">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>344</y>
+          <width>360</width>
+          <height>96</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Link Diagnostics</string>
+        </property>
+        <widget class="QLabel" name="lblPollCount">
+         <property name="geometry">
+          <rect>
+           <x>15</x>
+           <y>22</y>
+           <width>330</width>
+           <height>18</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Polls sent : --</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblCrcErrorCount">
+         <property name="geometry">
+          <rect>
+           <x>15</x>
+           <y>44</y>
+           <width>330</width>
+           <height>18</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>CRC errors : --</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblTimeoutCount">
+         <property name="geometry">
+          <rect>
+           <x>15</x>
+           <y>66</y>
+           <width>330</width>
+           <height>18</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Timeouts : --</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="grpRecordingHealth">
+        <property name="geometry">
+         <rect>
+          <x>400</x>
+          <y>344</y>
+          <width>360</width>
+          <height>96</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Recording (Clause 6.3 / 6.20)</string>
+        </property>
+        <widget class="QLabel" name="lblRecordingState">
+         <property name="geometry">
+          <rect>
+           <x>15</x>
+           <y>22</y>
+           <width>330</width>
+           <height>18</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Recording : --</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblLastLogInsert">
+         <property name="geometry">
+          <rect>
+           <x>15</x>
+           <y>44</y>
+           <width>330</width>
+           <height>18</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Last log insert : --</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblStorageFree">
+         <property name="geometry">
+          <rect>
+           <x>15</x>
+           <y>66</y>
+           <width>330</width>
+           <height>18</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Storage free : --</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="grpFaultLog">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>444</y>
+          <width>740</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Fault / Alarm Log (Clause 8.2)</string>
+        </property>
+        <widget class="QListWidget" name="listFaultLog">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>20</y>
+           <width>720</width>
+           <height>60</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="btnClearFaultLog">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>84</y>
+           <width>150</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Clear Log</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="btnExportDiagnostics">
+         <property name="geometry">
+          <rect>
+           <x>580</x>
+           <y>84</y>
+           <width>150</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Export Diagnostics</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QPushButton" name="btndashboard1">
+        <property name="geometry">
+         <rect>
+          <x>310</x>
+          <y>550</y>
+          <width>140</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Go Home</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="pagelog">
+       <widget class="QLabel" name="label_9">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>-10</y>
+          <width>71</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>log page</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="btndashboard2">
+        <property name="geometry">
+         <rect>
+          <x>60</x>
+          <y>500</y>
+          <width>88</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Go Home </string>
+        </property>
+       </widget>
+       <widget class="QTableWidget" name="tableWidgetLogs">
+        <property name="geometry">
+         <rect>
+          <x>-10</x>
+          <y>30</y>
+          <width>581</width>
+          <height>461</height>
+         </rect>
+        </property>
+        <attribute name="verticalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
+        <column>
+         <property name="text">
+          <string>ID</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>ETBU</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Start Time</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>End Time</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Operator ID</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>GPS</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Audio</string>
+         </property>
+        </column>
+       </widget>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
