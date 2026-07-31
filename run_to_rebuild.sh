@@ -8,6 +8,6 @@ cd ~/responder_unit/build-arm
 
 make -j$(nproc)
 
-scp untitled root@192.168.1.14:/root/
+scp untitled root@192.168.1.22:/root/
 
-ssh root@192.168.1.14 "pkill untitled || true; chmod +x /root/untitled; nohup /root/untitled >/tmp/untitled.log 2>&1 &"
+ssh root@192.168.1.22 "pkill untitled || true; chmod +x /root/untitled; nohup /root/untitled >/tmp/untitled.log 2>&1 &"

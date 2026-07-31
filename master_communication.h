@@ -95,7 +95,8 @@ private:
     void handleResponseUnitFrame(quint8 srcAddress,
                                  quint8 destAddress,
                                  quint8 functionCode);// Added by pooja on 30 july 2026 for RU frame
-    static constexpr quint8 responderAddress = 0x01;
+    //static constexpr quint8 responderAddress = 0x01;  //commented by pooja on 31 july 2026 for "means Response Unit always has address 0x01, even when it is acting as a Slave."
+    quint8 responderAddress = SLAVE_RU_ADDRESS;         //Added by pooja on 31 july 2026 for The address must change when the role changes.
     static constexpr quint8 etbuAddress = 0x0A;
 
     // NOTE ON ADDRESSING: RDSO/ICF spec ICF/ED/P/001 clause 5 states in

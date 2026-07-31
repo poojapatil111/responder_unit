@@ -779,8 +779,8 @@ void Master_communication::pollPeerResponseUnit()
     if (!m_isMaster)
         return;
 
-    QByteArray frame = master_frames::createResponseUnitActive(MASTER_RU_ADDRESS, SLAVE_RU_ADDRESS);
-
+    //QByteArray frame = master_frames::createResponseUnitActive(MASTER_RU_ADDRESS, SLAVE_RU_ADDRESS);  //commented by pooja on 31 july 2026
+    QByteArray frame = master_frames::createResponseUnitActive(responderAddress,SLAVE_RU_ADDRESS);      //Added by pooja on 31 july 2026 for use the current address
     serial->write(frame);
     serial->flush();
     serial->waitForBytesWritten(100);
@@ -809,8 +809,8 @@ void Master_communication::requestBecomeMaster()
         return;
     }
 
-    QByteArray frame = master_frames::createResponseUnitActiveRequest(SLAVE_RU_ADDRESS, MASTER_RU_ADDRESS);
-
+    //QByteArray frame = master_frames::createResponseUnitActiveRequest(SLAVE_RU_ADDRESS, MASTER_RU_ADDRESS);   //commented by pooja on 31 july 2026
+    QByteArray frame =master_frames::createResponseUnitActiveRequest(responderAddress,MASTER_RU_ADDRESS);       //Added by pooja on 31 july 2026 for use the current address
     serial->write(frame);
     serial->flush();
     serial->waitForBytesWritten(100);
@@ -821,82 +821,240 @@ void Master_communication::requestBecomeMaster()
     // before actually promoting ourselves - see handleResponseUnitFrame().
 }
 
-//void Master_communication::handleResponseUnitFrame(quint8 srcAddress, quint8 functionCode)
+// //void Master_communication::handleResponseUnitFrame(quint8 srcAddress, quint8 functionCode)
+// void Master_communication::handleResponseUnitFrame(
+//     quint8 srcAddress,
+//     quint8 destAddress,
+//     quint8 functionCode)
+// {
+//     switch (functionCode)
+//     {
+//     case 0x8D:  // Active Request - a Slave wants to become Master (clause 5.3.1)
+//     {
+//         if (!m_isMaster)
+//         {
+//             // We're the Slave and this is (unexpectedly) an Active Request
+//             // addressed to us - nothing to do, only a Master demotes on 0x8D.
+//             break;
+//         }
+
+//         qDebug() << "Received Active Request (0x8D) from" << srcAddress
+//                   << "- demoting self to Slave";
+
+//         // Confirm the demotion by sending Inactive (0x8F) back to the
+//         // requester, which promotes IT to Master.
+//         QByteArray frame = master_frames::createResponseUnitInactive(MASTER_RU_ADDRESS, srcAddress);
+//         serial->write(frame);
+//         serial->flush();
+//         serial->waitForBytesWritten(100);
+
+//         qDebug() << "Sent Inactive (0x8F) confirming demotion:" << frameToString(frame);
+
+//         m_isMaster = false;
+//         pollTimer->stop();       // Slave does not poll ETBUs
+//         peerPollTimer->stop();   // Slave does not poll the peer either
+
+//         emit roleChanged(false);
+//         qDebug()<<"***** THIS UNIT IS NOW SLAVE *****"; //Added by pooja on 30 july 2026
+//         emit linkFault("This unit demoted to Slave Response Unit");
+//         break;
+//     }
+
+//     case 0x8E:  // Active - the Master's periodic health poll (clause 5.3.2)
+//     {
+//         if (m_isMaster)
+//         {
+//             // Two Masters on the bus should not happen; log it, don't act.
+//             qDebug() << "WARNING: received Active(0x8E) poll while we are Master - ignoring";
+//             break;
+//         }
+
+//         QByteArray frame = master_frames::createResponseUnitInactive(SLAVE_RU_ADDRESS, srcAddress);
+//         serial->write(frame);
+//         serial->flush();
+//         serial->waitForBytesWritten(100);
+
+//         qDebug() << "Replied Inactive (0x8F) to Master's health poll:" << frameToString(frame);
+//         break;
+//     }
+
+//     case 0x8F:  // Inactive
+//     {
+//         if (m_isMaster)
+//         {
+//             // This is the Slave's normal health-poll acknowledgement.
+//             bool wasOffline = !m_peerOnline;
+//             m_peerOnline = true;
+//             m_peerLastResponse = QDateTime::currentDateTime();
+
+//             if (wasOffline)
+//                 emit peerStatusChanged(true);
+//         }
+//         else
+//         {
+//             // We were the Slave and requested promotion (0x8D) - this 0x8F
+//             // is the current Master confirming it has demoted itself.
+//             qDebug() << "Received Inactive (0x8F) confirmation - promoting self to Master";
+
+//             m_isMaster = true;
+//             m_peerOnline = true;
+//             m_peerLastResponse = QDateTime::currentDateTime();
+
+//             pollTimer->start(50);
+//             peerPollTimer->start(1000);
+
+//             emit roleChanged(true);
+//             emit linkFault("This unit promoted to Master Response Unit");
+//         }
+//         break;
+//     }
+
+//     default:
+//         qDebug() << "Unhandled response-unit function code:" << functionCode;
+//         break;
+//     }
+// }
+
+
 void Master_communication::handleResponseUnitFrame(
     quint8 srcAddress,
     quint8 destAddress,
     quint8 functionCode)
 {
-    switch (functionCode)
+    // Determine this Response Unit's address
+    quint8 myAddress = m_isMaster ? MASTER_RU_ADDRESS : SLAVE_RU_ADDRESS;
+
+    qDebug() << "================================";
+    qDebug() << "Response Unit Frame Received";
+    qDebug() << "Source Address      :" << srcAddress;
+    qDebug() << "Destination Address :" << destAddress;
+    qDebug() << "Function Code       :" << QString("0x%1")
+                                               .arg(functionCode,2,16,QLatin1Char('0')).toUpper();
+    qDebug() << "My Address          :" << myAddress;
+    qDebug() << "Current Role        :" << (m_isMaster ? "MASTER" : "SLAVE");
+    qDebug() << "================================";
+
+    // Ignore frames not addressed to this Response Unit
+    if(destAddress != myAddress)
     {
-    case 0x8D:  // Active Request - a Slave wants to become Master (clause 5.3.1)
+        qDebug() << "Frame not addressed to this unit. Ignoring...";
+        return;
+    }
+
+    switch(functionCode)
     {
-        if (!m_isMaster)
+    //---------------------------------------------------------
+    // Active Request (0x8D)
+    //---------------------------------------------------------
+    case 0x8D:
+    {
+        if(!m_isMaster)
         {
-            // We're the Slave and this is (unexpectedly) an Active Request
-            // addressed to us - nothing to do, only a Master demotes on 0x8D.
-            break;
+            qDebug() << "Ignoring Active Request because this unit is already SLAVE.";
+            return;
         }
 
-        qDebug() << "Received Active Request (0x8D) from" << srcAddress
-                  << "- demoting self to Slave";
+        qDebug() << "Received Active Request from Slave.";
+        qDebug() << "Changing this unit to SLAVE.";
 
-        // Confirm the demotion by sending Inactive (0x8F) back to the
-        // requester, which promotes IT to Master.
-        QByteArray frame = master_frames::createResponseUnitInactive(MASTER_RU_ADDRESS, srcAddress);
+        QByteArray frame =
+            master_frames::createResponseUnitInactive(
+                MASTER_RU_ADDRESS,
+                srcAddress);
+
         serial->write(frame);
         serial->flush();
         serial->waitForBytesWritten(100);
 
-        qDebug() << "Sent Inactive (0x8F) confirming demotion:" << frameToString(frame);
+        qDebug() << "TX :" << frameToString(frame);
 
         m_isMaster = false;
-        pollTimer->stop();       // Slave does not poll ETBUs
-        peerPollTimer->stop();   // Slave does not poll the peer either
+
+        responderAddress = SLAVE_RU_ADDRESS;
+
+        //Added by pooja on 31 july 2026 to check When becoming Master, update both the role and the address.
+        qDebug() << "*****************************";
+        qDebug() << "THIS UNIT IS NOW SLAVE";
+        qDebug() << "My Address =" << responderAddress;
+        qDebug() << "*****************************";
+        //Added done by pooja on 31 july 2026 to check When becoming Master, update both the role and the address.
+
+        pollTimer->stop();
+        peerPollTimer->stop();
 
         emit roleChanged(false);
-        qDebug()<<"***** THIS UNIT IS NOW SLAVE *****"; //Added by pooja on 30 july 2026
+
+        qDebug() << "*******************************";
+        qDebug() << "***** THIS UNIT IS SLAVE ******";
+        qDebug() << "*******************************";
+
         emit linkFault("This unit demoted to Slave Response Unit");
+
         break;
     }
 
-    case 0x8E:  // Active - the Master's periodic health poll (clause 5.3.2)
+        //---------------------------------------------------------
+        // Active Poll (0x8E)
+        //---------------------------------------------------------
+    case 0x8E:
     {
-        if (m_isMaster)
+        if(m_isMaster)
         {
-            // Two Masters on the bus should not happen; log it, don't act.
-            qDebug() << "WARNING: received Active(0x8E) poll while we are Master - ignoring";
+            qDebug() << "Received Active Poll while already MASTER.";
             break;
         }
 
-        QByteArray frame = master_frames::createResponseUnitInactive(SLAVE_RU_ADDRESS, srcAddress);
+        qDebug() << "Received Active Poll from MASTER.";
+
+        QByteArray frame =
+            master_frames::createResponseUnitInactive(
+                SLAVE_RU_ADDRESS,
+                srcAddress);
+
         serial->write(frame);
         serial->flush();
         serial->waitForBytesWritten(100);
 
-        qDebug() << "Replied Inactive (0x8F) to Master's health poll:" << frameToString(frame);
+        qDebug() << "TX :" << frameToString(frame);
+
         break;
     }
 
-    case 0x8F:  // Inactive
+        //---------------------------------------------------------
+        // Inactive (0x8F)
+        //---------------------------------------------------------
+    case 0x8F:
     {
-        if (m_isMaster)
+        if(m_isMaster)
         {
-            // This is the Slave's normal health-poll acknowledgement.
+            qDebug() << "Received Inactive acknowledgement from Slave.";
+
             bool wasOffline = !m_peerOnline;
+
             m_peerOnline = true;
             m_peerLastResponse = QDateTime::currentDateTime();
 
-            if (wasOffline)
+            if(wasOffline)
+            {
                 emit peerStatusChanged(true);
+            }
         }
         else
         {
-            // We were the Slave and requested promotion (0x8D) - this 0x8F
-            // is the current Master confirming it has demoted itself.
-            qDebug() << "Received Inactive (0x8F) confirmation - promoting self to Master";
+            qDebug() << "Received Inactive confirmation.";
+            qDebug() << "Changing this unit to MASTER.";
 
             m_isMaster = true;
+
+            //Added by pooja on 31 july 2026 to check When becoming Master, update both the role and the address.
+            responderAddress = MASTER_RU_ADDRESS;
+
+            qDebug() << "*****************************";
+            qDebug() << "THIS UNIT IS NOW MASTER";
+            qDebug() << "My Address =" << responderAddress;
+            qDebug() << "*****************************";
+            //Added done by pooja on 31 july 2026 to check When becoming Master, update both the role and the address.
+
             m_peerOnline = true;
             m_peerLastResponse = QDateTime::currentDateTime();
 
@@ -904,16 +1062,25 @@ void Master_communication::handleResponseUnitFrame(
             peerPollTimer->start(1000);
 
             emit roleChanged(true);
+
+            qDebug() << "*******************************";
+            qDebug() << "***** THIS UNIT IS MASTER *****";
+            qDebug() << "*******************************";
+
             emit linkFault("This unit promoted to Master Response Unit");
         }
+
         break;
     }
 
+        //---------------------------------------------------------
     default:
-        qDebug() << "Unhandled response-unit function code:" << functionCode;
+    {
+        qDebug() << "Unknown Response Unit Function Code:"
+                 << functionCode;
         break;
+    }
     }
 }
-
 
 
