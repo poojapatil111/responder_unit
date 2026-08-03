@@ -60,6 +60,8 @@ private slots:
     void on_btnSlaveUnit_clicked();
     void onRuRoleChanged(bool isMaster);
     void onPeerStatusChanged(bool online);
+    void onMasterRequestFailed();   // Added by pooja on 1 august 2026 to requestBecomeMaster() timed out - re-enable the button
+
 
     // Clause 5.2/7.1 - call alarm + 30s (programmable) escalation
     void onCallAlarmRaised(quint8 address);

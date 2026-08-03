@@ -61,6 +61,12 @@ public:
     // Called when the operator presses the on-screen 'Slave Unit' button
     // (clause 5.3.1) - a Slave sends an Active Request to ask to become
     // Master. Has no effect if this unit is already Master.
+    //Added by pooja on 1 august 2026
+    // Master. Has no effect if this unit is already Master, OR if a
+    // request was already sent and we are still waiting for the current
+    // Master's 0x8F reply (prevents duplicate 0x8D transmissions from a
+    // double-click / event-queue race - see requestBecomeMaster()).
+
     void requestBecomeMaster();
 
     // ---- Clause 5.2 / 7.1: call alarm + 30-second (programmable) escalation ----
@@ -73,6 +79,7 @@ private slots:
     void onTimeout();
     void pollPeerResponseUnit();   // periodic health poll to the other Response Unit
     void checkCallEscalation();    // clause 5.2 - 30s (programmable) escalation check
+    void onMasterRequestTimeout(); // Added by pooja on 1 august 2026 no 0x8F reply arrived after requestBecomeMaster() - clear the in-flight guard
 
 signals:
     void callQueueUpdated(const QList<quint8> &queue);
@@ -81,6 +88,7 @@ signals:
     void etbuOffline(quint8 address);                 // for Health page fault flag (clause 6.7/6.20)
     void roleChanged(bool isMaster);                  // UI updates the 'Slave Unit' button / master banner
     void peerStatusChanged(bool online);               // UI shows peer Response Unit health
+    void masterRequestFailed();                     //Added by pooja on 1 augiust 2026 requestBecomeMaster() timed out with no 0x8F reply - UI should re-enable the button
 
     // Clause 5.2 / 7.1 - warning audio alarm + visual location indication
     void callAlarmRaised(quint8 address);      // a new ETBU call just entered the queue
@@ -144,6 +152,16 @@ private:
     bool m_peerOnline = false;
     QDateTime m_peerLastResponse;
     QTimer *peerPollTimer = nullptr;     // Master polls Slave periodically (clause 5.3.2)
+
+    // Added by pooja on 1 august 2026 Guards against a second 0x8D being sent while a promotion request is
+    // already pending (double-click on 'Slave Unit', or the button-click
+    // event racing the 0x8F reply's readyRead() event in the Qt event
+    // queue). Set true in requestBecomeMaster(), cleared as soon as we
+    // actually become Master (0x8F received) or if masterRequestTimer
+    // expires with no reply.
+    bool m_masterRequestInFlight = false;
+    QTimer *masterRequestTimer = nullptr;   // single-shot; clears m_masterRequestInFlight if no 0x8F reply arrives
+    // Added done by pooja on 1 august 2026
 
     // Clause 5.2 / 7.1 - call alarm + 30s (programmable) escalation
     QMap<quint8, QDateTime> m_callQueuedSince;

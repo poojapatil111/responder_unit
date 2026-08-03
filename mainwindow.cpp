@@ -111,6 +111,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) , ui(new Ui::MainW
     connect(ui->btnSlaveUnit, &QPushButton::clicked, this, &MainWindow::on_btnSlaveUnit_clicked);
     connect(comm, &Master_communication::roleChanged, this, &MainWindow::onRuRoleChanged);
     connect(comm, &Master_communication::peerStatusChanged, this, &MainWindow::onPeerStatusChanged);
+    connect(comm, &Master_communication::masterRequestFailed, this, &MainWindow::onMasterRequestFailed);//Added by pooja on 1 august 2026
+
     onRuRoleChanged(comm->isMasterRole());   // set the initial label state
 
     // Clause 5.2/7.1 - call alarm + 30s (programmable) escalation
@@ -807,9 +809,31 @@ void MainWindow::on_btnSlaveUnit_clicked()
         return;
     }
 
+    // Added by pooja on 1 august 2026 to Disable immediately - before requestBecomeMaster() even runs - so a
+    // second physical tap that is already queued in the Qt event loop
+    // cannot fire on_btnSlaveUnit_clicked() again before onRuRoleChanged()
+    // gets a chance to disable it. This is what stops the duplicate 0x8D
+    // sends seen when the button was tapped right as the 0x8F reply arrived.
+    ui->btnSlaveUnit->setEnabled(false);
+    // Added done by pooja on 1 august 2026
+
+
     comm->requestBecomeMaster();
     addFaultLogEntry("Operator requested promotion to Master Response Unit");
 }
+
+// Added by pooja on 1 august 2026
+void MainWindow::onMasterRequestFailed()
+{
+    // No 0x8F reply arrived in time - the request did not succeed, so
+    // give the operator control back instead of leaving the button
+    // permanently disabled.
+    ui->btnSlaveUnit->setEnabled(!comm->isMasterRole());
+    QMessageBox::warning(this, "Slave Unit",
+                         "No response from the peer Response Unit. Promotion request failed - please try again.");
+}
+// Added done by pooja on 1 august 2026
+
 
 void MainWindow::onRuRoleChanged(bool isMaster)
 {

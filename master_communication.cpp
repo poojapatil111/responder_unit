@@ -31,11 +31,17 @@ Master_communication::Master_communication(QObject *parent):QObject(parent)
     peerPollTimer = new QTimer(this);                           //Section 5 peer health poll
     escalationTimer = new QTimer(this);                         //Clause 5.2 - 30s call escalation check
 
+    masterRequestTimer = new QTimer(this);                      // Added by pooja on 1 august 2026 guards requestBecomeMaster() against no-reply
+    masterRequestTimer->setSingleShot(true);                    // Added by pooja on 1 august 2026
+
+
     connect(pollTimer, &QTimer::timeout,this, &Master_communication::pollDevice);
     connect(serial,&QSerialPort::readyRead,this,&Master_communication::readResponse); // Receive Data
     connect(timeoutTimer,&QTimer::timeout,this,&Master_communication::onTimeout);
     connect(peerPollTimer, &QTimer::timeout, this, &Master_communication::pollPeerResponseUnit);
     connect(escalationTimer, &QTimer::timeout, this, &Master_communication::checkCallEscalation);
+    connect(masterRequestTimer, &QTimer::timeout, this, &Master_communication::onMasterRequestTimeout);//Added by pooja on 1 august 2026
+
     escalationTimer->start(1000);   // check once a second regardless of Master/Slave role
 }
 
@@ -602,7 +608,7 @@ void Master_communication::startCommunication()
     }
 
     //pollTimer->start(50);  //commented by pooja to RU by default slave unit
-    qDebug() << "***** NEW BUILD 16 JUL *****";
+    qDebug() << "***** NEW BUILD 1 AUG *****";
     //pollTimer->start(1000);//added by pooja on 16 jul 2026
     qDebug() << "Polling Started";
 
@@ -755,7 +761,16 @@ void Master_communication::checkCallEscalation()
                       << "s - escalating (clause 5.2)";
             emit linkFault(QString("Call from ETBU %1 unanswered for %2s - escalated")
                                .arg(address).arg(secsWaiting));
-            emit callEscalated(address);
+            //emit callEscalated(address);//commented by pooja on 1 august 2026
+            //Added by pooja on 1 august 2026
+            if(secsWaiting >= 30)
+            {
+                qDebug() << "***Escalating call to Driver Response Unit****";
+
+                requestBecomeMaster();   // or a new function like transferMastership()
+            }
+            //Added done by pooja on 1 august 2026
+
         }
     }
 }
@@ -809,6 +824,17 @@ void Master_communication::requestBecomeMaster()
         return;
     }
 
+    //Added by pooja on 1 august 2026
+    if (m_masterRequestInFlight)
+    {
+        qDebug() << "requestBecomeMaster() ignored - a request is already pending, waiting for 0x8F reply";
+        return;
+    }
+
+    m_masterRequestInFlight = true;   // block any further 0x8D until we get a reply or time out
+    //Added done by pooja on 1 august 2026
+
+
     //QByteArray frame = master_frames::createResponseUnitActiveRequest(SLAVE_RU_ADDRESS, MASTER_RU_ADDRESS);   //commented by pooja on 31 july 2026
     QByteArray frame =master_frames::createResponseUnitActiveRequest(responderAddress,MASTER_RU_ADDRESS);       //Added by pooja on 31 july 2026 for use the current address
     serial->write(frame);
@@ -819,6 +845,26 @@ void Master_communication::requestBecomeMaster()
 
     // We wait for the current Master to answer with 0x8F (clause 5.3.1)
     // before actually promoting ourselves - see handleResponseUnitFrame().
+
+    //Added by pooja on 1 august 2026
+    // If no reply comes back within 2s (peer offline / not actually Master
+    // yet), onMasterRequestTimeout() clears m_masterRequestInFlight so the
+    // operator can try again.
+    masterRequestTimer->start(2000);
+}
+
+void Master_communication::onMasterRequestTimeout()
+{
+    if (m_isMaster)
+        return;   // we were promoted in the meantime - nothing to clean up
+
+    qDebug() << "requestBecomeMaster() timed out - no 0x8F reply received";
+
+    m_masterRequestInFlight = false;
+    emit linkFault("Master promotion request timed out - no reply from peer Response Unit");
+    emit masterRequestFailed();   // UI re-enables the 'Slave Unit' button
+
+    //Added done by pooja on 1 august 2026
 }
 
 // //void Master_communication::handleResponseUnitFrame(quint8 srcAddress, quint8 functionCode)
@@ -970,6 +1016,9 @@ void Master_communication::handleResponseUnitFrame(
 
         m_isMaster = false;
 
+        m_masterRequestInFlight = false;   // Added by pooja on 1 august 2026 fresh Slave state - clear any stale guard
+
+
         responderAddress = SLAVE_RU_ADDRESS;
 
         //Added by pooja on 31 july 2026 to check When becoming Master, update both the role and the address.
@@ -1043,6 +1092,11 @@ void Master_communication::handleResponseUnitFrame(
         {
             qDebug() << "Received Inactive confirmation.";
             qDebug() << "Changing this unit to MASTER.";
+
+            masterRequestTimer->stop();         //Added by pooja on 1 august 2026
+            m_masterRequestInFlight = false;   //Added by pooja on 1 august 2026 clear the guard - the request that we were waiting on just succeeded
+
+
 
             m_isMaster = true;
 
