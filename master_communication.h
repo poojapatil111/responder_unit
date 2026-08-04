@@ -80,7 +80,7 @@ private slots:
     void pollPeerResponseUnit();   // periodic health poll to the other Response Unit
     void checkCallEscalation();    // clause 5.2 - 30s (programmable) escalation check
     void onMasterRequestTimeout(); // Added by pooja on 1 august 2026 no 0x8F reply arrived after requestBecomeMaster() - clear the in-flight guard
-
+    void onMasterSilenceTimeout(); // Added by pooja on 3 august 2026 Slave-side: Master hasn't polled (0x8E) for 30s - auto-promote (failover)
 signals:
     void callQueueUpdated(const QList<quint8> &queue);
     void activeCallChanged(quint8 address,QString state);
@@ -154,6 +154,29 @@ private:
     QTimer *peerPollTimer = nullptr;     // Master polls Slave periodically (clause 5.3.2)
 
     // Added by pooja on 1 august 2026 Guards against a second 0x8D being sent while a promotion request is
+
+    // Added by pooja on 3 august 2026 Slave-side failover watchdog: normally the Master sends an 0x8E
+    // health poll to the Slave once every second (peerPollTimer on the
+    // Master's side). If this unit is Slave and does NOT see an 0x8E
+    // addressed to it for MASTER_SILENCE_TIMEOUT_MS, the Master is presumed
+    // dead/unreachable, and this unit promotes itself to Master directly
+    // (no 0x8D/0x8F handshake possible since the Master isn't answering).
+    //
+    // m_masterEverSeen only arms the watchdog after the FIRST genuine 0x8E
+    // is received. This matters at cold boot: both units may default to
+    // Slave with no Master on the bus yet (see bootstrap discussion) - if
+    // the watchdog were armed immediately, both units would independently
+    // time out after 30s and self-promote at the same time, causing an
+    // address collision (both at 0x01). Arming only after a real Master has
+    // been observed at least once means this watchdog only fires for a
+    // genuine failure of an already-established Master.
+    QTimer *masterWatchdogTimer = nullptr;
+    bool m_masterEverSeen = false;
+    static constexpr int MASTER_SILENCE_TIMEOUT_MS = 30000;   // 30s per requirement
+
+    // Guards against a second 0x8D being sent while a promotion request is
+    //Added done by pooja on 3 august 2026
+
     // already pending (double-click on 'Slave Unit', or the button-click
     // event racing the 0x8F reply's readyRead() event in the Qt event
     // queue). Set true in requestBecomeMaster(), cleared as soon as we

@@ -34,14 +34,16 @@ Master_communication::Master_communication(QObject *parent):QObject(parent)
     masterRequestTimer = new QTimer(this);                      // Added by pooja on 1 august 2026 guards requestBecomeMaster() against no-reply
     masterRequestTimer->setSingleShot(true);                    // Added by pooja on 1 august 2026
 
+    masterWatchdogTimer = new QTimer(this);                     // Added by pooja on 3 August 2026 Slave-side: detects Master going silent (30s failover)
+    masterWatchdogTimer->setSingleShot(true);                   // Added by pooja on 3 August 2026 Slave-side: detects Master going silent (30s failover)
 
     connect(pollTimer, &QTimer::timeout,this, &Master_communication::pollDevice);
     connect(serial,&QSerialPort::readyRead,this,&Master_communication::readResponse); // Receive Data
     connect(timeoutTimer,&QTimer::timeout,this,&Master_communication::onTimeout);
     connect(peerPollTimer, &QTimer::timeout, this, &Master_communication::pollPeerResponseUnit);
     connect(escalationTimer, &QTimer::timeout, this, &Master_communication::checkCallEscalation);
-    connect(masterRequestTimer, &QTimer::timeout, this, &Master_communication::onMasterRequestTimeout);//Added by pooja on 1 august 2026
-
+    connect(masterRequestTimer, &QTimer::timeout, this, &Master_communication::onMasterRequestTimeout);     //Added by pooja on 1 august 2026
+    connect(masterWatchdogTimer, &QTimer::timeout, this, &Master_communication::onMasterSilenceTimeout);    // Added by pooja on 3 August 2026 Slave-side: detects Master going silent (30s failover)
     escalationTimer->start(1000);   // check once a second regardless of Master/Slave role
 }
 
@@ -762,14 +764,19 @@ void Master_communication::checkCallEscalation()
             emit linkFault(QString("Call from ETBU %1 unanswered for %2s - escalated")
                                .arg(address).arg(secsWaiting));
             //emit callEscalated(address);//commented by pooja on 1 august 2026
-            //Added by pooja on 1 august 2026
-            if(secsWaiting >= 30)
-            {
-                qDebug() << "***Escalating call to Driver Response Unit****";
+            emit callEscalated(address);//Added by pooja on 3 august 2026
 
-                requestBecomeMaster();   // or a new function like transferMastership()
-            }
-            //Added done by pooja on 1 august 2026
+            //Commented by pooja on 3 august 2026
+            // //Added by pooja on 1 august 2026
+            // if(secsWaiting >= 30)
+            // {
+            //     qDebug() << "***Escalating call to Driver Response Unit****";
+
+            //     requestBecomeMaster();   // or a new function like transferMastership()
+            // }
+            // //Added done by pooja on 1 august 2026
+            //Commented done by pooja on 3 august 2026
+
 
         }
     }
@@ -866,6 +873,42 @@ void Master_communication::onMasterRequestTimeout()
 
     //Added done by pooja on 1 august 2026
 }
+
+//Added by pooja on 3 august 2026
+void Master_communication::onMasterSilenceTimeout()
+{
+    // Runs only if masterWatchdogTimer actually fires - which only happens
+    // if we were Slave, had seen a genuine Master (m_masterEverSeen), and
+    // then received no further 0x8E poll for MASTER_SILENCE_TIMEOUT_MS.
+    if (m_isMaster)
+        return;   // became Master through some other path already - nothing to do
+
+    qDebug() << "*******************************************";
+    qDebug() << "MASTER RESPONSE UNIT SILENT FOR"
+             << (MASTER_SILENCE_TIMEOUT_MS / 1000) << "SECONDS";
+    qDebug() << "Auto-promoting this unit to MASTER (failover)";
+    qDebug() << "*******************************************";
+
+    m_isMaster = true;
+    responderAddress = MASTER_RU_ADDRESS;
+
+    m_masterRequestInFlight = false;   // any stale pending 0x8D request is moot now
+    masterRequestTimer->stop();
+
+    m_masterEverSeen = false;          // re-arm only if/when we're demoted back to Slave later
+    masterWatchdogTimer->stop();
+
+    m_peerOnline = false;              // the old Master is presumed down until it proves otherwise
+    m_peerLastResponse = QDateTime();
+
+    pollTimer->start(50);
+    peerPollTimer->start(1000);
+
+    emit roleChanged(true);
+    emit linkFault("Master Response Unit not responding for 30s - this unit auto-promoted to MASTER (failover)");
+
+}
+
 
 // //void Master_communication::handleResponseUnitFrame(quint8 srcAddress, quint8 functionCode)
 // void Master_communication::handleResponseUnitFrame(
@@ -1017,6 +1060,10 @@ void Master_communication::handleResponseUnitFrame(
         m_isMaster = false;
 
         m_masterRequestInFlight = false;   // Added by pooja on 1 august 2026 fresh Slave state - clear any stale guard
+        //Added by pooja on 3 august 2026 for master timeout
+        m_masterEverSeen = false;          // will re-arm on the new Master's first 0x8E poll
+        masterWatchdogTimer->stop();
+        //Added done by pooja on 3 august 2026 for master timeout
 
 
         responderAddress = SLAVE_RU_ADDRESS;
@@ -1054,6 +1101,13 @@ void Master_communication::handleResponseUnitFrame(
         }
 
         qDebug() << "Received Active Poll from MASTER.";
+
+        // Added by pooja on 3 August 2026 Master is alive and polling us - (re)arm the 30s failover watchdog.
+        m_masterEverSeen = true;
+        masterWatchdogTimer->start(MASTER_SILENCE_TIMEOUT_MS);
+        // Added done by pooja on 3 August 2026 Master is alive and polling us - (re)arm the 30s failover watchdog.
+
+
 
         QByteArray frame =
             master_frames::createResponseUnitInactive(
@@ -1096,6 +1150,8 @@ void Master_communication::handleResponseUnitFrame(
             masterRequestTimer->stop();         //Added by pooja on 1 august 2026
             m_masterRequestInFlight = false;   //Added by pooja on 1 august 2026 clear the guard - the request that we were waiting on just succeeded
 
+            masterWatchdogTimer->stop();       //Added by pooja on 3 august 2026 we ARE the Master now - stop watching for one
+            m_masterEverSeen = false;           //Added by pooja on 3 august 2026 re-arm only if/when we're demoted back to Slave
 
 
             m_isMaster = true;

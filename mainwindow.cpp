@@ -18,10 +18,26 @@
 #include <QHeaderView>
 #include "gpsmanager.h"
 #include <QApplication>
+//Added on 3 august 2026
+#include <QGuiApplication>
+#include <QScreen>
+#include <QDebug>
+//Added done on 3 august 2026
+
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    // Get screen resolution
+    QScreen *screen = QGuiApplication::primaryScreen();
+
+    qDebug() << "Resolution:"
+             << screen->size().width()
+             << "x"
+             << screen->size().height();
+    // done Get screen resolution
+
 
     setupLogTable();
 
@@ -930,3 +946,6 @@ void MainWindow::on_spinAlarmTimeout_valueChanged(int value)
 {
     comm->setEscalationThresholdSecs(value);
 }
+
+
+
